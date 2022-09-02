@@ -1,14 +1,12 @@
-import { Type } from 'class-transformer';
-import { IsNotEmpty, IsOptional, IsNumber, IsUUID, ValidateNested } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsNumber, IsUUID } from 'class-validator';
 import {
-    Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req
+    Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
 import { AccountNotFoundError } from '../errors/AccountNotFoundError';
 import { Account } from '../models/Account';
 import { AccountService } from '../services/AccountService';
-import { TransactionResponse } from './TransactionController';
 
 class BaseAccount {
     @IsNotEmpty()
@@ -29,20 +27,21 @@ export class AccountResponse extends BaseAccount {
     @IsUUID()
     public id: string;
 
+    @IsUUID()
+    public customerId: string;
+
     @IsNotEmpty()
     public createdAt: string;
 
     @IsNotEmpty()
     public updateddAt: string;
-
-    @ValidateNested({ each: true })
-    @Type(() => TransactionResponse)
-    public transactions: TransactionResponse[];
 }
 
-class CreateAccountBody extends BaseAccount {}
+class CreateAccountBody extends BaseAccount {
+    @IsUUID()
+    public customerId: string;
+}
 
-// @Authorized()
 @JsonController('/accounts')
 @OpenAPI({ security: [{ basicAuth: [] }] })
 export class AccountController {
@@ -55,12 +54,6 @@ export class AccountController {
     @ResponseSchema(AccountResponse, { isArray: true })
     public find(): Promise<Account[]> {
         return this.accountService.find();
-    }
-
-    @Get('/me')
-    @ResponseSchema(AccountResponse, { isArray: true })
-    public findMe(@Req() req: any): Promise<Account[]> {
-        return req.account;
     }
 
     @Get('/:id')

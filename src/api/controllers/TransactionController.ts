@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsUUID, ValidateNested } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
 import {
     Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put
 } from 'routing-controllers';
@@ -7,7 +7,7 @@ import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { TransactionNotFoundError } from '../errors/TransactionNotFoundError';
 import { Transaction } from '../models/Transaction';
 import { TransactionService } from '../services/TransactionService';
-import { AccountResponse } from './AccountController';
+// import { AccountResponse } from './AccountController';
 
 class BaseTransaction {
     @IsNotEmpty()
@@ -22,13 +22,13 @@ export class TransactionResponse extends BaseTransaction {
     public id: string;
 
     @IsNotEmpty()
+    public accountId: string;
+
+    @IsNotEmpty()
     public createdAt: string;
 
     @IsNotEmpty()
     public updateddAt: string;
-
-    @ValidateNested()
-    public account: AccountResponse;
 }
 
 class CreateTransactionBody extends BaseTransaction {
