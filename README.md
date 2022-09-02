@@ -43,7 +43,7 @@ The route prefix is `/api`.
 | **src/public/**                   | Static assets (fonts, css, js, img). |
 | **test**                          | Tests |
 | **test/e2e/** *.test.ts           | End-2-End tests (like e2e) |
-| **test/integration/** *.test.ts   | Integration test with SQLite3 |
+| **test/integration/** *.test.ts   | Integration test |
 | **test/unit/** *.test.ts          | Unit tests |
 
 ## ❯ Getting Started
@@ -93,13 +93,13 @@ All script are defined in the `package-scripts.js` file, but the most important 
 
 ## ❯ To improve
 
-### 1. Authentication and Authorization
+#### 1. Authentication and Authorization
 
-### 2. Unit, Integration, and E2E testing
+#### 2. Unit, Integration, and E2E testing
 
-### 3. Proper error codes and API versioning
+#### 3. Proper error codes and API versioning
 
-### 4. DDoS and brute force attacks
+#### 4. DDoS and brute force attacks
 
 ## ❯ License
 
