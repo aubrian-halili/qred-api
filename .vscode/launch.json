@@ -5,6 +5,60 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Invoke Lambda",
+            "aws": {
+                "credentials": "profile:Klarna_ADFS_disputes@klarna-non-production",
+                "region": "eu-west-1"
+            },
+            "invokeTarget": {
+                "target": "code",
+                "lambdaHandler": "dist/index.lambdaHandler",
+                "projectRoot": "${workspaceFolder}"
+            },
+            "lambda": {
+                "runtime": "nodejs14.x",
+                "environmentVariables": {
+                    "AWS_REGION": "eu-west-1"
+                },
+                "payload": {
+                    "path": "local.env/src/api/handler/data.json",
+                }
+            }
+        },
+        {
+            "name": "Run Test",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            "request": "launch",
+            "env": {
+                "AWS_REGION": "eu-west-1",
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "args": [
+                "${relativeFile}",
+                "--config",
+                "jest.config.js"
+            ],
+            "type": "node"
+        },
+        {
+            "name": "Run Program",
+            "program": "${relativeFile}",
+            "request": "launch",
+            "env": {
+                "AWS_REGION": "eu-west-1",
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+            // "console": "integratedTerminal",
+            // "internalConsoleOptions": "neverOpen"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Debug",
