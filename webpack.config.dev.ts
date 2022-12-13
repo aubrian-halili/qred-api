@@ -3,7 +3,7 @@ const ZipPlugin = require('zip-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const fs = require('fs')
 
-// Make some changes
+// Second line change
 // npx webpack --config ./webpack.config.dev.js
 // Automated Webpack configuration for Lambdas
 //
