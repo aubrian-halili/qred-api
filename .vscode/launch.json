@@ -77,6 +77,22 @@
             "name": "Nodemon Debug",
             "port": 9229,
             "restart": true
+        },
+        ,
+        {
+            "name": "Run",
+            "type": "node",
+            "request": "launch",
+            "env": {
+                "AWS_REGION": "eu-west-1",
+                "AWS_PROFILE": "default"
+            },
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
+            "args": ["${relativeFile}"],
+            "cwd": "${workspaceRoot}",
+            "internalConsoleOptions": "openOnSessionStart",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"]
         }
     ]
 }
